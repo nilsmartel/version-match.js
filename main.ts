@@ -49,3 +49,9 @@ function getDependencies(files: string[]) {
 
     return depMap
 }
+
+
+let { files, target } = parseArgs()
+let deps = getDependencies(files)
+
+
