@@ -24,3 +24,9 @@ function parseArgs() {
 
     return { files, target }
 }
+function getDependencies(files: string[]) {
+    console.log("info", `reading ${files.length} files`)
+
+    let depss: Record<string, string>[] = files
+        .map(s => String(fs.readFileSync(s)))
+}
