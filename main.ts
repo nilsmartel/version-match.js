@@ -70,3 +70,4 @@ let output = JSON.stringify(pkgJson, null, 2)
 console.log("(info)", "writing " + target)
 
 fs.writeFileSync(target, output)
+
