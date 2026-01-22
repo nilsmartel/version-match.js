@@ -1,3 +1,6 @@
+import fs from "fs"
+
+
 function parseArgs() {
     const argv = process.argv.slice(2)
 
@@ -24,6 +27,8 @@ function parseArgs() {
 
     return { files, target }
 }
+
+
 function getDependencies(files: string[]) {
     console.log("info", `reading ${files.length} files`)
 
