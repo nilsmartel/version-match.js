@@ -55,3 +55,6 @@ let { files, target } = parseArgs()
 let deps = getDependencies(files)
 
 
+console.log("(info)", "reading " + target)
+let pkgJsonContent = String(fs.readFileSync(target!))
+let pkgJson = JSON.parse(pkgJsonContent)
