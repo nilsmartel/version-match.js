@@ -29,4 +29,5 @@ function getDependencies(files: string[]) {
 
     let depss: Record<string, string>[] = files
         .map(s => String(fs.readFileSync(s)))
+        .map(s => JSON.parse(s)).map(pkg => ({ ...pkg.dependencies, ...pkg.devDependencies } as Record<string, string>))
 }
