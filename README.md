@@ -5,7 +5,7 @@ Upgrade versions in a `package.json` by referencing dependencies from other proj
 ## What it does
 
 - Reads the `dependencies` and `devDependencies` fields from the list of input `package.json` files.
-- Builds a map of the highest (string-compared) version seen for each dependency.
+- Builds a map of the highest version string seen for each dependency (lexicographic comparison; not semver-aware).
 - Updates the target `package.json` in place for any matching dependencies/devDependencies.
 
 ## Usage
@@ -14,11 +14,11 @@ Provide one or more `package.json` files to read from and a `--target` file to u
 
 ```bash
 # Using bun (can run TypeScript directly)
-bun main.ts --target ./package.json ../project-a/package.json ../project-b/package.json
+bun main.ts ../project-a/package.json ../project-b/package.json --target ./package.json
 
 # Using ts-node
 npm install
-npx ts-node main.ts --target ./package.json ../project-a/package.json
+npx ts-node main.ts ../project-a/package.json --target ./package.json
 ```
 
 The target file is rewritten with updated version strings.
