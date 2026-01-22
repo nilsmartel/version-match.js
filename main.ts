@@ -58,3 +58,8 @@ let deps = getDependencies(files)
 console.log("(info)", "reading " + target)
 let pkgJsonContent = String(fs.readFileSync(target!))
 let pkgJson = JSON.parse(pkgJsonContent)
+
+// For all kinds of dependencies, look up of we have information about a newer version we can use instead
+for (let d of [pkgJson.dependencies, pkgJson.devDependencies])
+    for (let key in d)
+        if (deps[key] >= pkgJson[key]) pkgJson[key] = deps[key]
