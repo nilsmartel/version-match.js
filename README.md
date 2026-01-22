@@ -27,6 +27,14 @@ The target file is rewritten with updated version strings.
 
 To install this as a local CLI command on your machine:
 
+## Using bun
+
+- run `bun run compile`
+    > this will create a `version-match` executable for you
+- move executable into your $PATH.
+
+
+## Using npm, npx and node
 1. Build the TypeScript file to JavaScript:
 
    ```bash
