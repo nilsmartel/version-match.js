@@ -30,7 +30,7 @@ function parseArgs() {
 
 
 function getDependencies(files: string[]) {
-    console.log("info", `reading ${files.length} files`)
+    console.log("(info)", `reading ${files.length} files`)
 
     let depss: Record<string, string>[] = files
         .map(s => String(fs.readFileSync(s)))
@@ -47,6 +47,8 @@ function getDependencies(files: string[]) {
         }
     }
 
+    console.log("(info)", `found info on ${Object.keys(depMap).length} dependencies`)
+
     return depMap
 }
 
@@ -60,9 +62,17 @@ let pkgJsonContent = String(fs.readFileSync(target!))
 let pkgJson = JSON.parse(pkgJsonContent)
 
 // For all kinds of dependencies, look up of we have information about a newer version we can use instead
-for (let d of [pkgJson.dependencies, pkgJson.devDependencies])
-    for (let key in d)
-        if (deps[key] >= pkgJson[key]) pkgJson[key] = deps[key]
+for (let d of [pkgJson.dependencies, pkgJson.devDependencies]) {
+    for (let key in d) {
+        // version of dependency in keys
+        let dv = deps[key]
+        let v = pkgJson[key]
+        if (dv >= v) {
+            console.log("(info)", `${key}: ${v} => ${dv}`)
+            pkgJson[key] = dv
+        }
+    }
+}
 
 
 let output = JSON.stringify(pkgJson, null, 2)
