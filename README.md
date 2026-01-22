@@ -5,7 +5,7 @@ Upgrade versions in a `package.json` by referencing dependencies from other proj
 ## What it does
 
 - Reads the `dependencies` and `devDependencies` fields from the list of input `package.json` files.
-- Builds a map of the highest version string seen for each dependency using JavaScript's string comparison (lexicographic order), so `"10.0.0"` is considered lower than `"2.0.0"` and may not match semver expectations.
+- Builds a map of the highest version string seen for each dependency using JavaScript's string comparison (lexicographic order), so `"2.0.0"` is considered higher than `"10.0.0"` and may not match semver expectations.
 - Updates the target `package.json` in place for any matching dependencies/devDependencies.
 
 ## Usage
@@ -30,7 +30,7 @@ To install this as a local CLI command on your machine:
 1. Build the TypeScript file to JavaScript:
 
    ```bash
-   npx --yes typescript@latest tsc main.ts --outDir dist --module commonjs --target es2020
+   npx --yes typescript@5.3.3 tsc main.ts --outDir dist --module commonjs --target es2020
    ```
 
 2. Add a Node shebang and make the output executable:
