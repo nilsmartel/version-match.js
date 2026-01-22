@@ -63,3 +63,10 @@ let pkgJson = JSON.parse(pkgJsonContent)
 for (let d of [pkgJson.dependencies, pkgJson.devDependencies])
     for (let key in d)
         if (deps[key] >= pkgJson[key]) pkgJson[key] = deps[key]
+
+
+let output = JSON.stringify(pkgJson, null, 2)
+
+console.log("(info)", "writing " + target)
+
+fs.writeFileSync(target, output)
