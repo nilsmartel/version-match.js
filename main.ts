@@ -66,10 +66,11 @@ for (let d of [pkgJson.dependencies, pkgJson.devDependencies]) {
     for (let key in d) {
         // version of dependency in keys
         let dv = deps[key]
-        let v = pkgJson[key]
-        if (dv >= v) {
+        let v = d[key]
+
+        if (dv > v) {
             console.log("(info)", `${key}: ${v} => ${dv}`)
-            pkgJson[key] = dv
+            d[key] = dv
         }
     }
 }
