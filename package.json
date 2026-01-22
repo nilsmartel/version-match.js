@@ -7,6 +7,7 @@
   "type": "commonjs",
   "main": "main.ts",
   "scripts": {
+    "compile": "bun build main.ts --compile --outfile version-match",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
