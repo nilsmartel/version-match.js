@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Run npm node-compile before committing
+echo "Running npm run node-compile..."
+
+# Run the compile command
+npm run node-compile
+
+# Check if the command succeeded
+if [ $? -ne 0 ]; then
+    echo "❌ npm run node-compile failed. Commit aborted."
+    exit 1
+fi
+
+echo "✅ npm run node-compile completed successfully."
