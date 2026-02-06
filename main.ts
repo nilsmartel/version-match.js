@@ -21,6 +21,7 @@ function parseArgs() {
         }
 
         files.push(a)
+      targetFlag = false
     }
 
     if (!target) throw "expect file passed after --target flag. I.e. --target package.json"
