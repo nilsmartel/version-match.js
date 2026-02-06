@@ -18,8 +18,8 @@ Example:
   `);
   process.exit(0);
 }
-function parseArgs() {
-  const argv = process.argv.slice(2);
+function parseArgs(argv) {
+  argv = argv.splice(2);
   if (argv.includes("-h") || argv.includes("--help")) {
     printHelpAndExit();
   }
@@ -65,7 +65,7 @@ function getDependencies(files) {
   console.log("(info)", `found info on ${Object.keys(depMap).length} dependencies`);
   return depMap;
 }
-var { files, target } = parseArgs();
+var { files, target } = parseArgs(process.argv);
 var deps = getDependencies(files);
 console.log("(info)", "reading " + target);
 var pkgJsonContent = String(fs.readFileSync(target));
