@@ -19,9 +19,8 @@ Example:
   process.exit(0)
 }
 
-function parseArgs() {
-  const argv = process.argv.slice(2)
-
+function parseArgs(argv: string[]) {
+  argv = argv.splice(2)
   // Check for help flag
   if (argv.includes("-h") || argv.includes("--help")) {
     printHelpAndExit()
@@ -94,7 +93,7 @@ function getDependencies(files: string[]) {
   return depMap
 }
 
-let { files, target } = parseArgs()
+let { files, target } = parseArgs(process.argv)
 let deps = getDependencies(files)
 
 console.log("(info)", "reading " + target)
