@@ -1,7 +1,28 @@
 // main.ts
 var { default: fs} = (() => ({}));
+function printHelpAndExit() {
+  console.log(`
+Usage: version-match [OPTIONS] <files...>
+
+Synchronize package.json dependencies with the latest versions found in other package.json files.
+
+Options:
+  --target <file>    Target package.json file to update (required)
+  -h, --help         Show this help message and exit
+
+Arguments:
+  <files...>         One or more package.json files to scan for dependencies
+
+Example:
+  version-match --target ./package.json ./services/*/package.json
+  `);
+  process.exit(0);
+}
 function parseArgs() {
   const argv = process.argv.slice(2);
+  if (argv.includes("-h") || argv.includes("--help")) {
+    printHelpAndExit();
+  }
   let targetFlag = false;
   let target = undefined;
   const files = [];
@@ -17,8 +38,16 @@ function parseArgs() {
     }
     files.push(a);
   }
-  if (!target)
-    throw "expect file passed after --target flag. I.e. --target package.json";
+  if (!target) {
+    console.error("Error: --target flag is required");
+    console.error("Use --help for usage information");
+    process.exit(1);
+  }
+  if (files.length === 0) {
+    console.error("Error: At least one package.json file must be specified");
+    console.error("Use --help for usage information");
+    process.exit(1);
+  }
   return { files, target };
 }
 function getDependencies(files) {
