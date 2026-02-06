@@ -12,6 +12,7 @@ function parseArgs() {
     }
     if (targetFlag === true) {
       target = a;
+      targetFlag = false;
       continue;
     }
     files.push(a);
